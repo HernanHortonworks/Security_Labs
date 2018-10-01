@@ -11,6 +11,10 @@ export NAME=ipa
 export DOMAIN=us-west-2.compute.internal
 export IP=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')
 
+#### IP bash command correction
+### export IP=$(ifconfig -a |grep "inet " |awk '{print $2}' |awk -F":" '{if ($2) print $2; else print $1}'|grep -v 127.0.0.1)
+###
+
 echo "IP is ${IP}"
 
 echo "${IP} ${NAME}.${DOMAIN} ${NAME} $(hostname -f) $(hostname -s)" >> /etc/hosts
